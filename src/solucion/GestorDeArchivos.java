@@ -92,9 +92,11 @@ public class GestorDeArchivos {
 		File directory = new File(name);
 		
 		if(name != null && !name.isEmpty()) {
-			for(File files : localizacion.listFiles()) {
-				if(files.isFile()) files.delete();
-				if(files.isDirectory()) {
+			for(File files : directory.listFiles()) {
+				
+				if(files.isFile() && files.exists()) files.delete();
+				
+				if(files.isDirectory() && files.exists()) {
 					borrarDirectorioRec(directory.getName());
 					files.delete();
 				}
@@ -181,7 +183,11 @@ public class GestorDeArchivos {
 	// Moverse al directorio padre = atras
 	public boolean moverAPadre() {
 		// Debug localizacion.getAbsolutePath() C:\.
-		return moverDirectorio(localizacion.getAbsolutePath().replace(this.getLocation(), ""));
+		if(this.getLocation().equals(File.separator)) {
+			return false;
+		}
+		return moverDirectorio(localizacion.getAbsolutePath().replace(this.getLocation(), "\\."));
+		
 	}
 	// Moverse al siguiente sub directorio especificado
 	public boolean moverAHijo(String ruta) {

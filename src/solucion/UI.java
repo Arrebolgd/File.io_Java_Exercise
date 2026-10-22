@@ -122,7 +122,6 @@ public class UI {
 		case 1:
 			gda.moverAPadre();
 			break;
-
 		case 2:
 			System.out.println("Estos son los directorios a los que puede desplazarse.");
 			System.out.println("¿A que directorio desea ir?");
